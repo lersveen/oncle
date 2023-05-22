@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+    <script>
+        $(document).ready(function() {
+            var calendar = $('#calendar');
+
+            function renderCalendar(range) {
+                $.ajax({
+                    url: '/events',
+                    data: { range: range },
+                    success: function(data) {
+                        calendar.fullCalendar('destroy'); // Destroy existing calendar
+                        calendar.fullCalendar({
+                            events: data,
+                            eventRender: function(event, element) {
+                                element.css('background-color', event.color);
+                            }
+                        });
+                    }
+                });
+            }
+
+            renderCalendar('month'); // Initial rendering
+
+            $('#range-selector').change(function() {
+                var selectedRange = $(this).val();
+                renderCalendar(selectedRange);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <label for="range-selector">Select Range:</label>
+        <select id="range-selector">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+        </select>
+    </div>
+    <div id='calendar'></div>
+</body>
+</html>

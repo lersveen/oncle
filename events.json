@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Event 1",
+        "start": "2023-05-20T10:00:00",
+        "end": "2023-05-20T12:00:00",
+        "color": "red",
+        "tags": ["tag1", "tag2"],
+        "recurrence": "RRULE:FREQ=WEEKLY;BYDAY=MO"
+    },
+    {
+        "title": "Event 2",
+        "start": "2023-05-22T14:00:00",
+        "end": "2023-05-22T16:00:00",
+        "color": "blue",
+        "tags": ["tag3"],
+        "recurrence": "RRULE:FREQ=MONTHLY;BYMONTHDAY=15"
+    }
+]
